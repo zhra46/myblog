@@ -1,0 +1,38 @@
+{% load my_tags %}
+<div id="main">
+    <div class="archives-wrap">
+        {% regroup aposts by created.year as year_list %}
+        {% for year in year_list|rvs %}
+            {% regroup year.list by created.month as month_list %}
+            {% for month in month_list|rvs %}
+            <div class="archive-year-wrap">
+                <span class="archive-year">{{ year.grouper }}-{{ month.grouper }}</span>
+            </div>
+            {% for post in month.list  %}
+            <div class="archives" style ="display:inline-block;width: 200px;margin:0 10px;">
+
+                <article class="archive-article archive-type-post" style ="width:200px">
+                    <div class="archive-article-inner">
+                        <header class="archive-article-header">
+                            <a href="#" class="archive-article-date">
+                                <time>{{ post.created.year }} {{ post.created.month }}</time>
+                            </a>
+                            <h1 itemprop="name">
+                                <a class="archive-article-title" target="_blank" href="/blog/details/{{ post.id }}">{{ post.title }}</a>
+                            </h1>
+                        </header>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+
+
+            {% endfor %}
+
+
+        {% endfor %}
+
+
+    </div>
+</div>
+

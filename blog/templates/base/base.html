@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>caibao的博客</title>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+</head>
+<body>
+<div id="container">
+    <div id="wrap">
+{#        header#}
+        {% include 'base/header.html' %}
+        <div class="outer">
+            {% block main %}
+
+            {% endblock main %}
+            {% include 'sidebar.html' %}
+        </div>
+{#        footer#}
+        {% include 'base/footer.html' %}
+    </div>
+</div>
+</body>
+</html>
