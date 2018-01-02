@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
+    'haystack'
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,11 @@ STATICFILES_DIRS.append('./static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 CKEDITOR_UPLOAD_PATH = 'upload/'
+
+HAYSTACK_CONNECTIONS = {
+    'default':{
+'ENGINE': 'whoosh_cn_backend.WhooshEngine',
+			        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
