@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^category/(\d+)',views.CategoryDetails.as_view()),
     url(r'^archive/(\d+)/(\d+)',views.ArchiveDetails.as_view()),
     url(r'^archive/',views.ArchiveDetails.as_view()),
-    url(r'^makepost/',views.MakePost.as_view())
+    url(r'^makepost/',views.MakePost.as_view()),
+    url(r'^search/',views.Search.as_view())
 ]

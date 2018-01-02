@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.views import View
 from django.http import *
+from haystack.backends import SQ
+from haystack.query import SearchQuerySet
+
 from .models import Post
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -42,7 +45,6 @@ class IndexView(View):
         print(post.__dict__)
         return render(request, 'index/index.html', {'ppost':post_page, 'post':post, 'plist':paginator_list, 'page_num':page_num})
 
-
 class DetailsView(View):
     def get(self,request,blog_id = None):
         if blog_id:
@@ -74,3 +76,13 @@ class ArchiveDetails(View):
 
 class MakePost(View):
     pass
+
+
+class Search(View):
+    def get(self,request):
+        kw = request.GET.get('q','')
+        print kw
+        result = SearchQuerySet().filter(SQ(title=kw)|SQ(content=kw)).all()
+        posts = [post.object for post in result]
+        print posts
+        return render(request,'archive/details.html',{'aposts':posts})
